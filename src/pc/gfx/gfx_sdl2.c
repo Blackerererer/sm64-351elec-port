@@ -45,7 +45,7 @@ static void (*on_all_keys_up_callback)(void);
 
 #define S_IN_NS (1e+9)
 #define MS_IN_NS (1e+6)
-static const double TARGET_FRAMETIME = (double)S_IN_NS / 31.5f; //1.5 frames of headroom
+static const double TARGET_FRAMETIME = (double)S_IN_NS / 60.0f;
 static const double SLEEP_FRAMETIME = MS_IN_NS * 5.0;
 static struct timespec prev_frame = {};
 
@@ -153,7 +153,7 @@ int test_vsync(void) {
     float average = 4.0 * 1000.0 / (end - start);
 
     vsync_enabled = 1;
-    if (average > 27 && average < 33) {
+    /*if (average > 27 && average < 33) {
         SDL_GL_SetSwapInterval(1);
     } else if (average > 57 && average < 63) {
         SDL_GL_SetSwapInterval(2);
@@ -161,6 +161,13 @@ int test_vsync(void) {
         SDL_GL_SetSwapInterval(3);
     } else if (average > 115 && average < 125) {
         SDL_GL_SetSwapInterval(4);
+    } else {
+        vsync_enabled = 0;
+    }*/
+    if (average > 57 && average < 63) {
+        SDL_GL_SetSwapInterval(1);
+    } else if (average > 115 && average < 125) {
+        SDL_GL_SetSwapInterval(2);
     } else {
         vsync_enabled = 0;
     }
