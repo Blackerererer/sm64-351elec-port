@@ -273,7 +273,7 @@ else
   ifeq ($(TARGET_WEB),1)
     OPT_FLAGS := -O2 -g4 --source-map-base http://localhost:8080/
   else 
-    OPT_FLAGS := -O2
+    OPT_FLAGS := -O0
   endif
 endif
 
@@ -487,7 +487,7 @@ ifeq ($(TARGET_WEB),1)
   PLATFORM_LDFLAGS := -lm -no-pie -s TOTAL_MEMORY=20MB -g4 --source-map-base http://localhost:8080/ -s "EXTRA_EXPORTED_RUNTIME_METHODS=['callMain']"
 endif
 
-PLATFORM_CFLAGS += -DNO_SEGMENTED_MEMORY -DUSE_SYSTEM_MALLOC
+PLATFORM_CFLAGS += -DUSE_EXT_RAM -DNO_SEGMENTED_MEMORY -DUSE_SYSTEM_MALLOC
 
 # Compiler and linker flags for graphics backend
 ifeq ($(ENABLE_OPENGL),1)
@@ -651,6 +651,8 @@ $(BUILD_DIR)/include/text_strings.h: $(BUILD_DIR)/include/text_menu_strings.h
 $(BUILD_DIR)/src/menu/file_select.o: $(BUILD_DIR)/include/text_strings.h
 $(BUILD_DIR)/src/menu/star_select.o: $(BUILD_DIR)/include/text_strings.h
 $(BUILD_DIR)/src/game/ingame_menu.o: $(BUILD_DIR)/include/text_strings.h
+$(BUILD_DIR)/src/game/camera.o: $(BUILD_DIR)/include/text_strings.h
+
 
 ################################################################
 # TEXTURE GENERATION                                           #
