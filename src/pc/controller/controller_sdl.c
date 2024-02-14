@@ -38,7 +38,7 @@ static void controller_sdl_init(void) {
     #endif
 
     #ifdef TARGET_ARK
-        if (SDL_GameControllerAddMappingsFromFile("/roms/ports/sm64/controller/gamecontrollerdb.txt") < 0) {
+        if (SDL_GameControllerAddMappingsFromFile(SDL_getenv("SDL_GAMECONTROLLERCONFIG_FILE")) < 0) {
             fprintf(stderr, "SDL mapping error: %s\n", SDL_GetError());
             return;
         }
